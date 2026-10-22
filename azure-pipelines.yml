@@ -1,0 +1,26 @@
+trigger: none
+pr: none
+
+parameters:
+- name: environmentName
+  type: string
+  default: prep-sp-repro
+
+pool:
+  vmImage: ubuntu-latest
+
+stages:
+- stage: CreateBlueGreenStacks
+  displayName: "101 - Create blue-green Stacks"
+  jobs:
+  - deployment: DeployToPrep
+    displayName: "Wait for environment approval"
+    environment: ${{ parameters.environmentName }}
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - bash: |
+              echo "Environment approval passed."
+              date -u
+            displayName: "Simulated deployment"
