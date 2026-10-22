@@ -25,17 +25,4 @@ stages:
               date -u
             displayName: "Simulated deployment"
 
-- stage: CreateBlueGreenStacks2
-  displayName: "101 - Create blue-green Stacks2"
-  jobs:
-  - deployment: DeployToPrep
-    displayName: "Wait for environment approval"
-    environment: ${{ parameters.environmentName }}
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - bash: |
-              echo "Environment approval passed."
-              date -u
-            displayName: "Simulated deployment"
+
